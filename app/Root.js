@@ -106,12 +106,13 @@ const styles = StyleSheet.create({
     top : 50
   },
   code : {
-    width : 13,
-    height : 13,
-    borderRadius : 13,
+    width : 10,
+    height : 10,
+    borderRadius : 10,
     borderWidth : 1,
     margin : 10,
-    Color : '#a6d8e8',
+    borderColor : '#a6d8e8',
+    backgroundColor : '#a6d8e8',
   },
   numbersContainer : {
     flexDirection : 'row',
