@@ -9,7 +9,7 @@ import {
   StatusBar,
   SafeAreaView,
   Dimensions,
-  TouchableOpacity, 
+  TouchableOpacity,
 } from 'react-native';
 
 const {width, height} = Dimensions.get('window');
@@ -21,38 +21,39 @@ export default class lock_screen_passcode extends Component {
     };
   }
 
-  press_num = num => {
-    let temcode = this.state.passcode;
-    for(var i = 0; 1 < temcode.length; i++){
-      if(temcode[i] == ''){
-        temcode[i] = num;
+  Press_number = num => {
+    let tempCode = this.state.passcode;
+    for (var i = 0; i < tempCode.length; i++){
+      if (tempCode[i] == ''){
+        tempCode[i] = num;
         break;
-      }else{
+      } else {
         continue;
       }
     }
-    this.setState({passcode : temcode});
+    this.setState({ passcode: tempCode});
   };
+
 
   render() {
 
     let numbers = [
-      {id: 1 },
-      {id: 2 },
-      {id: 3 },
-      {id: 4 },
-      {id: 5 },
-      {id: 6 },
-      {id: 7 },
-      {id: 8 },
-      {id: 9 },
-      {id: 0 },
+      {id:1},
+      {id:2},
+      {id:3},
+      {id:4},
+      {id:5},
+      {id:6},
+      {id:7},
+      {id:8},
+      {id:9},
+      {id:0},
 
     ];
 
     return (
       <SafeAreaView style={styles.container}>
-        <StatusBar barStyle="dark-content" />
+        <StatusBar barStyle="light-content" />
         <View style={styles.top_container} >
           <View style={{flexDirection : 'row'}} >
             <Text style={styles.enter_text}> Enter your PIN code </Text>
@@ -67,60 +68,29 @@ export default class lock_screen_passcode extends Component {
             })}
           </View>
         </View>
-        <View style = {{alignItems : 'center', justifyContent : 'center'}}>  
+        <View style = {{alignItems : 'center', justifyContent : 'center'}}>
           <View style = {styles.numbersContainer}>
             {numbers.map(num=> {
               return (
-              <TouchableOpacity 
-                style={styles.number} 
-                key={num.id}
-                _pressnum={()=> this.press_num(num.id)}
-              >
-                <Text style = {styles.numberText}>{num.id}</Text>
-              </TouchableOpacity>  );
+                <TouchableOpacity
+                  style = {styles.number}
+                  key = {num.id}
+                  onPress = {() => this.Press_number(num.id)}
+                >
+                  <Text style = {styles.numberText}>{num.id}</Text>
+                </TouchableOpacity>
+              );
             })}
-
-            {/* <View style = {styles.number}>
-              <Text style = {styles.numberText}>1</Text>
-            </View>
-
-            <View style = {styles.number}>
-              <Text style = {styles.numberText}>2</Text>
-            </View>
-
-            <View style = {styles.number}>
-              <Text style = {styles.numberText}>3</Text>
-            </View>
-
-            <View style = {styles.number}>
-              <Text style = {styles.numberText}>4</Text>
-            </View>
-
-            <View style = {styles.number}>
-              <Text style = {styles.numberText}>5</Text>
-            </View>
-
-            <View style = {styles.number}>
-              <Text style = {styles.numberText}>6</Text>
-            </View>
-
-            <View style = {styles.number}>
-              <Text style = {styles.numberText}>7</Text>
-            </View>
-
-            <View style = {styles.number}>
-              <Text style = {styles.numberText}>8</Text>
-            </View>
-
-            <View style = {styles.number}>
-              <Text style = {styles.numberText}>9</Text>
-            </View>
-
-            <View style = {styles.number}>
-              <Text style = {styles.numberText}>0</Text>
-            </View> */}
           </View>
         </View>
+
+        <View style = {styles.buttons}>
+          <TouchableOpacity>
+            <Text style = {styles.buttonsText}>Delete</Text>
+          </TouchableOpacity>
+        </View>
+
+        
       </SafeAreaView>
     );
   }
@@ -145,6 +115,7 @@ const styles = StyleSheet.create({
     lineHeight : 40,
     marginTop : 25,
   },
+
   codeContainer : {
     marginTop : 12,
     flexDirection : 'row',
