@@ -21,6 +21,19 @@ export default class lock_screen_passcode extends Component {
     };
   }
 
+  press_num = num => {
+    let temcode = this.state.passcode;
+    for(var i = 0; 1 < temcode.length; i++){
+      if(temcode[i] == ''){
+        temcode[i] = num;
+        break;
+      }else{
+        continue;
+      }
+    }
+    this.setState({passcode : temcode});
+  };
+
   render() {
 
     let numbers = [
@@ -58,9 +71,13 @@ export default class lock_screen_passcode extends Component {
           <View style = {styles.numbersContainer}>
             {numbers.map(num=> {
               return (
-              <View style={styles.number} key={num.id}>
+              <TouchableOpacity 
+                style={styles.number} 
+                key={num.id}
+                _pressnum={()=> this.press_num(num.id)}
+              >
                 <Text style = {styles.numberText}>{num.id}</Text>
-              </View>  );
+              </TouchableOpacity>  );
             })}
 
             {/* <View style = {styles.number}>
