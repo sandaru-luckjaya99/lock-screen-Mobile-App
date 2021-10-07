@@ -20,7 +20,23 @@ export default class lock_screen_passcode extends Component {
       passcode : ['','','',''],
     };
   }
+
   render() {
+
+    let numbers = [
+      {id: 1 },
+      {id: 2 },
+      {id: 3 },
+      {id: 4 },
+      {id: 5 },
+      {id: 6 },
+      {id: 7 },
+      {id: 8 },
+      {id: 9 },
+      {id: 0 },
+
+    ];
+
     return (
       <SafeAreaView style={styles.container}>
         <StatusBar barStyle="dark-content" />
@@ -28,7 +44,7 @@ export default class lock_screen_passcode extends Component {
           <View style={{flexDirection : 'row'}} >
             <Text style={styles.enter_text}> Enter your PIN code </Text>
           </View>
-          
+
           <View style = {styles.codeContainer}>
           {
             this.state.passcode.map(p=>{
@@ -38,9 +54,16 @@ export default class lock_screen_passcode extends Component {
             })}
           </View>
         </View>
-        <View style = {{alignItems : 'center', justifyContent : 'center'}}>
+        <View style = {{alignItems : 'center', justifyContent : 'center'}}>  
           <View style = {styles.numbersContainer}>
-            <View style = {styles.number}>
+            {numbers.map(num=> {
+              return (
+              <View style={styles.number} key={num.id}>
+                <Text style = {styles.numberText}>{num.id}</Text>
+              </View>  );
+            })}
+
+            {/* <View style = {styles.number}>
               <Text style = {styles.numberText}>1</Text>
             </View>
 
@@ -78,8 +101,7 @@ export default class lock_screen_passcode extends Component {
 
             <View style = {styles.number}>
               <Text style = {styles.numberText}>0</Text>
-            </View>
-
+            </View> */}
           </View>
         </View>
       </SafeAreaView>
