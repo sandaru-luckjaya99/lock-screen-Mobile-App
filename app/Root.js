@@ -9,11 +9,17 @@ import {
   StatusBar,
   SafeAreaView,
   Dimensions,
+  TouchableOpacity, 
 } from 'react-native';
 
 const {width, height} = Dimensions.get('window');
-
 export default class lock_screen_passcode extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      passcode : ['','','',''],
+    };
+  }
   render() {
     return (
       <SafeAreaView style={styles.container}>
@@ -22,12 +28,14 @@ export default class lock_screen_passcode extends Component {
           <View style={{flexDirection : 'row'}} >
             <Text style={styles.enter_text}> Enter your PIN code </Text>
           </View>
-
+          
           <View style = {styles.codeContainer}>
-            <View style = {styles.code}></View>
-            <View style = {styles.code}></View>
-            <View style = {styles.code}></View>
-            <View style = {styles.code}></View>
+          {
+            this.state.passcode.map(p=>{
+              let style = p != '' ? styles.code2 : styles.code1;
+              return <View style = {style} />;
+
+            })}
           </View>
         </View>
         <View style = {{alignItems : 'center', justifyContent : 'center'}}>
@@ -66,11 +74,12 @@ export default class lock_screen_passcode extends Component {
 
             <View style = {styles.number}>
               <Text style = {styles.numberText}>9</Text>
-            </View> 
-            
+            </View>
+
             <View style = {styles.number}>
               <Text style = {styles.numberText}>0</Text>
             </View>
+
           </View>
         </View>
       </SafeAreaView>
@@ -95,25 +104,34 @@ const styles = StyleSheet.create({
     color : '#B3C1D4',
     letterSpacing : -0.41,
     lineHeight : 40,
-    marginTop : 25
-    
+    marginTop : 25,
   },
   codeContainer : {
     marginTop : 12,
     flexDirection : 'row',
     alignItems : 'center',
     justifyContent : 'space-between',
-    top : 50
+    top : 50,
   },
-  code : {
+
+  code1 : {
     width : 10,
     height : 10,
     borderRadius : 10,
     borderWidth : 1,
     margin : 10,
     borderColor : '#a6d8e8',
+    // backgroundColor : '#a6d8e8',
+  },
+
+  code2 : {
+    width : 10,
+    height : 10,
+    borderRadius : 10,
+    margin : 10,
     backgroundColor : '#a6d8e8',
   },
+
   numbersContainer : {
     flexDirection : 'row',
     flexWrap : 'wrap',
@@ -133,8 +151,6 @@ const styles = StyleSheet.create({
     backgroundColor :'#EEF4FA',
     justifyContent : 'center',
     alignItems : 'center',
-
-
   },
 
   numberText : {
@@ -142,9 +158,6 @@ const styles = StyleSheet.create({
     fontSize : 36,
     color :'#B3C1D4',
     letterSpacing : 0,
-    textAlign : 'center'
-
+    textAlign : 'center',
   },
-
-
 });
