@@ -34,6 +34,21 @@ export default class lock_screen_passcode extends Component {
     this.setState({ passcode: tempCode});
   };
 
+  Press_delete = () => {
+    let tempCode = this.state.passcode;
+    for (var i = tempCode.length-1; i>=0; i--){
+      if (tempCode[i] != ''){
+        tempCode[i] = '';
+        break;
+      } else {
+        continue;
+      }
+    }
+    this.setState({passcode : tempCode});
+  };
+
+
+
 
   render() {
 
@@ -64,7 +79,6 @@ export default class lock_screen_passcode extends Component {
             this.state.passcode.map(p=>{
               let style = p != '' ? styles.code2 : styles.code1;
               return <View style = {style} />;
-
             })}
           </View>
         </View>
@@ -76,6 +90,7 @@ export default class lock_screen_passcode extends Component {
                   style = {styles.number}
                   key = {num.id}
                   onPress = {() => this.Press_number(num.id)}
+                  
                 >
                   <Text style = {styles.numberText}>{num.id}</Text>
                 </TouchableOpacity>
@@ -85,7 +100,7 @@ export default class lock_screen_passcode extends Component {
         </View>
 
         <View style = {styles.buttons}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress = {()=>this.Press_delete()}>
             <Text style = {styles.buttonsText}>Delete</Text>
           </TouchableOpacity>
         </View>
@@ -131,8 +146,8 @@ const styles = StyleSheet.create({
     borderWidth : 1,
     margin : 10,
     borderColor : '#a6d8e8',
-    // backgroundColor : '#a6d8e8',
   },
+  
 
   code2 : {
     width : 10,
@@ -163,6 +178,16 @@ const styles = StyleSheet.create({
     alignItems : 'center',
   },
 
+  number_press : {
+    width : 75,
+    height : 75,
+    borderRadius : 75,
+    margin : 14,
+    backgroundColor :'#a6d8e8',
+    justifyContent : 'center',
+    alignItems : 'center',
+  },
+
   numberText : {
     fontFamily : 'roboto',
     fontSize : 36,
@@ -170,4 +195,14 @@ const styles = StyleSheet.create({
     letterSpacing : 0,
     textAlign : 'center',
   },
+  buttons : {
+    margin : 45,
+    marginLeft : 290,
+    marginRight : 0,
+    flexDirection : 'row',
+    alignItems : 'flex-start',
+  }
+
+
+
 });
