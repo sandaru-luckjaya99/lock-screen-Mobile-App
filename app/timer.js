@@ -17,37 +17,22 @@ import {
   
 } from 'react-native';
 
-export default class c_downtimer extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-    
-    };
-  }
-
+export default class Ctimer extends Component {
+  
   render() {
     return (
       <View style={styles3.container}>
-        <View style={styles3.txt1_Vw}>
-            <CountDown 
-             until={60}
-             size={30}
-             onFinish={() => alert('Finished')}
-            //digitStyle={{backgroundColor: '#FFF'}}
-            //  digitTxtStyle={{color: '#1CC625'}}
-             timeToShow={['M', 'S']}
-             timeLabels={{m: 'MM', s: 'SS'}}
-           />
+        <View style={styles3.timerVw}>
+          <CountDown 
             
-            
-            {/* <CountDown
-            until={1}
-            onFinish={console.log('done')}
-            size = {20}
-            timeToShow = {['M','S']}
-            /> */}
-          
-          {/* <Text style={styles3.enter_text}>Maximum attempt reached</Text> */}
+            until={60}
+            size={28}
+            onFinish={() => alert('Finished')}
+            digitStyle={{backgroundColor: '#FFF'}}
+            digitTxtStyle={{color: 'black'}}
+           timeToShow={['M','S']}
+           timeLabels={{m: 'MM', s: 'SS'}}
+          />
         </View>
       </View>
     );
@@ -59,18 +44,22 @@ const styles3 = StyleSheet.create({
     flex: 1,
   },
 
-  txt1_Vw: {
-    Height: 178,
+  timerVw: {
+    Height: 150,
     alignItems: 'center',
     justifyContent: 'center',
+    alignItems : 'center',
+    marginTop : 200
+    
+    // flexDirection: "column"
   },
 
-  enter_text: {
-    fontFamily: 'roboto',
-    fontSize: 25,
-    color: '#B3C1D4',
-    letterSpacing: -0.41,
-    lineHeight: 40,
-    marginTop: 25,
-  },
+  // timerc: {
+  //   Height: 200,
+  //   alignItems: 'center',
+  //   justifyContent: 'center',
+  //   alignItems : 'center'
+  // },
+
+
 });
