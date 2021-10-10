@@ -1,5 +1,9 @@
 /* eslint-disable prettier/prettier */
+//import React from 'react';
 import React, {Component} from 'react';
+//import CountDown from 'react-native-countdown-component';
+
+
 import {
   Text,
   View,
@@ -10,6 +14,7 @@ import {
   SafeAreaView,
   Dimensions,
   TouchableOpacity,
+  CountDown
 } from 'react-native';
 
 export default class screen_2 extends Component {
@@ -24,7 +29,7 @@ export default class screen_2 extends Component {
     return (
       <View style={styles2.container}>
         <View style={styles2.txt1_Vw}>
-          <Text style = {styles2.enter_text}> Maximum attempt reached </Text>
+          <Text style={styles2.enter_text}>Maximum attempt reached</Text>
         </View>
       </View>
     );
@@ -36,19 +41,17 @@ const styles2 = StyleSheet.create({
   },
 
   txt1_Vw: {
-    Height : 178,
-    alignItems : 'center',
-    justifyContent : 'center'
-
+    Height: 178,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 
   enter_text: {
-    fontFamily : 'roboto',
-    fontSize : 25,
-    color : '#B3C1D4',
-    letterSpacing : -0.41,
-    lineHeight : 40,
-    marginTop : 25,
+    fontFamily: 'roboto',
+    fontSize: 25,
+    color: '#B3C1D4',
+    letterSpacing: -0.41,
+    lineHeight: 40,
+    marginTop: 25,
   },
-
 });
