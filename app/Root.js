@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 
 const {width, height} = Dimensions.get('window');
-export default class lock_screen_passcode extends Component {
+export default class Lock_screen_passcode extends Component {
   constructor(props) {
     super(props);
     this.state = {
