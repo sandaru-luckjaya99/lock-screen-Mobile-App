@@ -5,15 +5,9 @@ import CountDown from "react-native-countdown-component";
 //import { useCountdownTimer } from 'use-countdown-timer';
 
 import {
-  Text,
+  
   View,
   StyleSheet,
-  ImageBackground,
-  Image,
-  StatusBar,
-  SafeAreaView,
-  Dimensions,
-  TouchableOpacity,
   
 } from 'react-native';
 
@@ -27,11 +21,11 @@ export default class Ctimer extends Component {
             
             until={60}
             size={28}
-            onFinish={() => alert('Finished')}
+            onFinish={console.log("done")}
             digitStyle={{backgroundColor: '#FFF'}}
             digitTxtStyle={{color: 'black'}}
-           timeToShow={['M','S']}
-           timeLabels={{m: 'MM', s: 'SS'}}
+            timeToShow={['M','S']}
+            timeLabels={{m: 'MM', s: 'SS'}}
           />
         </View>
       </View>
@@ -49,17 +43,7 @@ const styles3 = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     alignItems : 'center',
-    marginTop : 200
+    marginTop : 200,
     
-    // flexDirection: "column"
   },
-
-  // timerc: {
-  //   Height: 200,
-  //   alignItems: 'center',
-  //   justifyContent: 'center',
-  //   alignItems : 'center'
-  // },
-
-
 });
