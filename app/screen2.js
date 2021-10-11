@@ -5,7 +5,7 @@ import React, {Component} from 'react';
 
 import Ctimer from './timer';
 
-import {Text, View, StyleSheet, Image} from 'react-native';
+import {Text, View, StyleSheet, Image, Button} from 'react-native';
 
 export default class screen_2 extends Component {
   render() {
@@ -19,10 +19,16 @@ export default class screen_2 extends Component {
               style={styles2.lockicon}
               source={require('./assets/picture/lock.png')}
             />
-          
           </View>
-          <View style ={styles2.midview}>
-            <Text style = {styles2.text2}>To protect your information access has been locked for 1 minites. Come back later and try again</Text>
+          <View style={styles2.midview}>
+            <Text style={styles2.text2}>
+              To protect your information access has been locked for 1 minites.
+              Come back later and try again
+            </Text>
+          </View>
+
+          <View style = {styles2.bottomview}>
+            <Button title=" Quite " color="blue" />
           </View>
         </View>
       </View>
@@ -35,7 +41,7 @@ const styles2 = StyleSheet.create({
   },
 
   view1: {
-    marginTop : 29,
+    marginTop: 29,
     Height: 178,
     alignItems: 'center',
     justifyContent: 'center',
@@ -53,23 +59,24 @@ const styles2 = StyleSheet.create({
   lockicon: {
     height: 70,
     width: 70,
-    marginTop : 220,
+    marginTop: 220,
   },
   text2: {
-    padding : 30,
+    padding: 30,
     fontFamily: 'roboto',
     fontSize: 16,
     color: 'black',
     letterSpacing: 0,
     lineHeight: 25,
-    textAlign : 'center'
+    textAlign: 'center',
   },
 
   midview: {
     padding: 10,
-    marginTop : 20,
+    marginTop: 20,
     Height: 178,
     alignItems: 'center',
     justifyContent: 'center',
   },
+
 });
