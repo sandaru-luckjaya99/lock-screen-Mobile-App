@@ -15,100 +15,84 @@ import {
 
 const {width, height} = Dimensions.get('window');
 export default class Lock_screen_passcode extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
       passcode: [0, 0, 0, 0],
       count: 1,
-      code_entrycount : 1,
-      text_wrong_case : <Text style={styles.enter_text}> Enter your PIN code </Text>
+      code_entrycount: 1,
+      entry_text: (
+        <>
+          <View style={{flexDirection: 'row'}}>
+            <Text style={styles.enter_text}> Enter your PIN code </Text>
+          </View>
+
+          <View>
+            <Text style={styles.re_enter_txt}></Text>
+          </View>
+        </>
+      ),
+
+      // <Text style={styles.enter_text}> Enter your PIN code </Text>
     };
-
-    //this.state2 = {count: 0};
   }
-
-  // Press_number1 = num => {
-
-  //   const
-
-  //   const tempCode = this.state.passcode;
-
-  //   for (var i = 0; i < tempCode.length; i++) {
-
-  //     if (tempCode[i] == 0) {
-
-  //       tempCode[i] = num;
-  //       console.log(tempCode);
-  //       break;
-
-  //     } else {
-  //       continue;
-  //     }
-
-  //   }
-
-  //   if  (this.state2.count == 4){
-
-  //   } this.state2.count + 1;
-
-  //   this.verifier(tempCode);
-  //   this.setState({ passcode: tempCode});
-
-  // };
 
   verifier = tempCode => {
     const pincode = [1, 2, 3, 4];
 
-    if (this.state.count===4){
-
-
-
+    if (this.state.count === 4) {
       if (JSON.stringify(tempCode) === JSON.stringify(pincode)) {
-        
-        this.setState({code_entrycount: this.state.code_entrycount+1});
+        this.setState({code_entrycount: this.state.code_entrycount + 1});
 
         console.log('yes');
-        console.log("eeeeee"+this.state.code_entrycount);
+        console.log('eeeeee' + this.state.code_entrycount);
+      } else {
+        this.setState({
+          entry_text: (
+            <>
+              <View style={{flexDirection: 'row'}}>
+                <Text style={styles.enter_text_wrongcase}>
+                  {' '}
+                  Enter your PIN code{' '}
+                </Text>
+              </View>
+              <View>
+                <Text style={styles.re_enter_txt}> please try again </Text>
+              </View>
+            </>
+          ),
+        });
 
+        this.setState({code_entrycount: this.state.code_entrycount + 1});
 
+        // {
+        //   () => this.All_delete;
+        // }
+
+        let tempCode = this.state.passcode;
+        this.setState({count: 1});
+        console.log(this.state.count);
+
+        for (var i = tempCode.length - 1; i >= 0; i--) {
+          if (tempCode[i] != '') {
+            tempCode[i] = '';
+            //break;
+          } else {
+            continue;
+          }
+        }
+        this.setState({passcode: tempCode});
       }
     }
-    else{
-      this.setState({code_entrycount: this.state.code_entrycount+1});
-    };
   };
 
-  // Press_number = num => {
-  //   const tempCode = this.state.passcode;
-  //   let i = 0;
-
-  //   while ( i < 4) {
-  //     if (tempCode[i] === '') {
-  //       tempCode[i] = num;
-  //       console.log(tempCode);
-  //       break;
-  //     } else {npx
-  //       continue;
-  //     }
-
-  //   }
-
-  //   this.verifier(tempCode)
-
-  //   this.setState({passcode: tempCode});
-
-  //   i++
-  // };
-
   Press_number = num => {
-
     const tempCode = this.state.passcode;
     console.log(this.state.count);
 
     for (var i = 0; i < tempCode.length; i++) {
       if (tempCode[i] == 0) {
-        this.setState({count : this.state.count+1});
+        this.setState({count: this.state.count + 1});
 
         tempCode[i] = num;
         console.log(tempCode);
@@ -116,16 +100,32 @@ export default class Lock_screen_passcode extends Component {
         break;
       } else {
         continue;
-      };
-    };
+      }
+    }
 
     this.verifier(tempCode);
     this.setState({passcode: tempCode});
   };
 
+  All_delete = () => {
+    let tempCode = this.state.passcode;
+    this.setState({count: 0});
+    console.log(this.state.count);
+
+    for (var i = tempCode.length - 1; i >= 0; i--) {
+      if (tempCode[i] != '') {
+        tempCode[i] = '';
+        //break;
+      } else {
+        continue;
+      }
+    }
+    this.setState({passcode: tempCode});
+  };
+
   Press_delete = () => {
     let tempCode = this.state.passcode;
-    this.setState({count : this.state.count-1});
+    this.setState({count: this.state.count - 1});
     console.log(this.state.count);
 
     for (var i = tempCode.length - 1; i >= 0; i--) {
@@ -157,17 +157,17 @@ export default class Lock_screen_passcode extends Component {
       <SafeAreaView style={styles.container}>
         <StatusBar barStyle="light-content" />
         <View style={styles.top_container}>
-          <View style={{flexDirection: 'row'}}>
-            {/* <Text style={styles.enter_text}> Enter your PIN code </Text> */}
-            {this.state.text_wrong_case}
-          </View>
+          {/* <View style={{flexDirection: 'row'}}>
+            <Text style={styles.enter_text}> Enter your PIN code </Text>
+          </View> */}
+
+          {this.state.entry_text}
 
           <View style={styles.codeContainer}>
             {this.state.passcode.map(p => {
               let style = p != '' ? styles.code2 : styles.code1;
               return <View style={style} />;
             })}
-
           </View>
         </View>
 
@@ -216,12 +216,32 @@ const styles = StyleSheet.create({
     marginTop: 25,
   },
 
+  enter_text_wrongcase: {
+    fontFamily: 'roboto',
+    fontSize: 25,
+    color: 'red',
+    letterSpacing: -0.41,
+    lineHeight: 25,
+    marginTop: 18,
+    alignItems: 'center',
+  },
+  re_enter_txt: {
+    fontFamily: 'roboto',
+    flexDirection: 'column',
+    fontSize: 15,
+    color: 'red',
+    letterSpacing: -0.41,
+    lineHeight: 35,
+    marginTop: 5,
+    alignItems: 'center',
+  },
+
   codeContainer: {
-    marginTop: 12,
+    marginTop: 10,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    top: 50,
+    top: 45,
   },
 
   code1: {
