@@ -11,7 +11,9 @@
   },
   "dependencies": {
     "react": "17.0.2",
-    "react-native": "0.66.0"
+    "react-native": "0.66.0",
+    "react-native-countdown-component": "^2.7.1",
+    "react-native-countdown-component-cm": "^1.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
@@ -20,6 +22,7 @@
     "babel-jest": "^26.6.3",
     "eslint": "7.14.0",
     "jest": "^26.6.3",
+    "jetifier": "^2.0.0",
     "metro-react-native-babel-preset": "^0.66.2",
     "react-test-renderer": "17.0.2"
   },
