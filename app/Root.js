@@ -10,7 +10,8 @@ import {
   StatusBar,
   SafeAreaView,
   Dimensions,
-  TouchableOpacity,
+  Alert,
+  TouchableHighlight,
 } from 'react-native';
 
 const {width, height} = Dimensions.get('window');
@@ -18,36 +19,47 @@ export default class Lock_screen_passcode extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      passcode: [0, 0, 0, 0],
-      count: 1,
-      code_entrycount: 1,
+      passcode: [0, 0, 0, 0], // to get password
+      count: 1, // how many numbers enterd at once
+      code_entrycount: 1, // how many times wrong
+
+      // Enter your pin code- phrase as a variable
       entry_text: (
         <>
           <View style={{flexDirection: 'row'}}>
             <Text style={styles.enter_text}> Enter your PIN code </Text>
           </View>
-
           <View>
             <Text style={styles.re_enter_txt}></Text>
           </View>
         </>
       ),
-
-      // <Text style={styles.enter_text}> Enter your PIN code </Text>
     };
   }
 
+  // Code verify
   verifier = tempCode => {
+    // permenent password
     const pincode = [1, 2, 3, 4];
 
-    if (this.state.count === 4) {
+
+
+   
+
+    // check how many times enter wrong
+    if ((this.state.count === 3) ) {
+      // Verify the pin code -->> false part
       if (JSON.stringify(tempCode) === JSON.stringify(pincode)) {
         this.setState({code_entrycount: this.state.code_entrycount + 1});
+        Alert.alert('Success! App will rederect you to the home now !');
 
-        console.log('yes');
-        console.log('eeeeee' + this.state.code_entrycount);
+        // console.log('yes');
+        // console.log('eeeeee' + this.state.code_entrycount);
+
+        // Verify the pin code -->> true part
       } else {
         this.setState({
+          //entry text converting to red
           entry_text: (
             <>
               <View style={{flexDirection: 'row'}}>
@@ -63,11 +75,8 @@ export default class Lock_screen_passcode extends Component {
           ),
         });
 
+        // count how many times wrong
         this.setState({code_entrycount: this.state.code_entrycount + 1});
-
-        // {
-        //   () => this.All_delete;
-        // }
 
         let tempCode = this.state.passcode;
         this.setState({count: 1});
@@ -82,9 +91,13 @@ export default class Lock_screen_passcode extends Component {
           }
         }
         this.setState({passcode: tempCode});
-      }
+      };
+    }else{
+      
     }
   };
+
+  // get number pressed
 
   Press_number = num => {
     const tempCode = this.state.passcode;
@@ -107,6 +120,8 @@ export default class Lock_screen_passcode extends Component {
     this.setState({passcode: tempCode});
   };
 
+  // Delete all implications of code container
+
   All_delete = () => {
     let tempCode = this.state.passcode;
     this.setState({count: 0});
@@ -115,13 +130,14 @@ export default class Lock_screen_passcode extends Component {
     for (var i = tempCode.length - 1; i >= 0; i--) {
       if (tempCode[i] != '') {
         tempCode[i] = '';
-        //break;
       } else {
         continue;
       }
     }
     this.setState({passcode: tempCode});
   };
+
+  // Delete one by one
 
   Press_delete = () => {
     let tempCode = this.state.passcode;
@@ -140,6 +156,7 @@ export default class Lock_screen_passcode extends Component {
   };
 
   render() {
+    // Numbers
     let numbers = [
       {id: 1},
       {id: 2},
@@ -156,13 +173,12 @@ export default class Lock_screen_passcode extends Component {
     return (
       <SafeAreaView style={styles.container}>
         <StatusBar barStyle="light-content" />
-        <View style={styles.top_container}>
-          {/* <View style={{flexDirection: 'row'}}>
-            <Text style={styles.enter_text}> Enter your PIN code </Text>
-          </View> */}
 
+        <View style={styles.top_container}>
+          {/* enter your Pin code text */}
           {this.state.entry_text}
 
+          {/* code indicator */}
           <View style={styles.codeContainer}>
             {this.state.passcode.map(p => {
               let style = p != '' ? styles.code2 : styles.code1;
@@ -171,25 +187,32 @@ export default class Lock_screen_passcode extends Component {
           </View>
         </View>
 
+        {/* Number buttons */}
         <View style={{alignItems: 'center', justifyContent: 'center'}}>
           <View style={styles.numbersContainer}>
             {numbers.map(num => {
               return (
-                <TouchableOpacity
+                <TouchableHighlight
+                  activeOpacity={0.5}
+                  underlayColor="#80e9d8"
                   style={styles.number}
                   key={num.id}
                   onPress={() => this.Press_number(num.id)}>
                   <Text style={styles.numberText}>{num.id}</Text>
-                </TouchableOpacity>
+                </TouchableHighlight>
               );
             })}
           </View>
         </View>
 
+        {/* Delete buttons */}
         <View style={styles.buttons}>
-          <TouchableOpacity onPress={() => this.Press_delete()}>
+          <TouchableHighlight
+            activeOpacity={0.5}
+            underlayColor="#80e9d8"
+            onPress={() => this.Press_delete()}>
             <Text style={styles.buttonsText}>Delete</Text>
-          </TouchableOpacity>
+          </TouchableHighlight>
         </View>
       </SafeAreaView>
     );
@@ -208,9 +231,9 @@ const styles = StyleSheet.create({
   },
 
   enter_text: {
-    fontFamily: 'roboto',
+    fontFamily: 'Roboto-Italic',
     fontSize: 25,
-    color: '#B3C1D4',
+    color: '#a6d8e8',
     letterSpacing: -0.41,
     lineHeight: 40,
     marginTop: 25,
@@ -258,7 +281,7 @@ const styles = StyleSheet.create({
     height: 10,
     borderRadius: 10,
     margin: 10,
-    backgroundColor: '#a6d8e8',
+    backgroundColor: '#80e9d8',
   },
 
   numbersContainer: {
@@ -295,7 +318,7 @@ const styles = StyleSheet.create({
   numberText: {
     fontFamily: 'roboto',
     fontSize: 36,
-    color: '#B3C1D4',
+    color: '#5c7aa2',
     letterSpacing: 0,
     textAlign: 'center',
   },

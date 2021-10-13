@@ -28,7 +28,7 @@ export default class screen_2 extends Component {
           </View>
 
           <View style = {styles2.bottomview}>
-            <Button title=" Quite " color="blue" />
+            <Button title=" Quite " color='#80e9d8' />
           </View>
         </View>
       </View>
@@ -48,9 +48,9 @@ const styles2 = StyleSheet.create({
   },
 
   text1: {
-    fontFamily: 'roboto',
+    fontFamily: 'Roboto',
     fontSize: 25,
-    color: '#B3C1D4',
+    color: '#a6d8e8',
     letterSpacing: -0.41,
     lineHeight: 40,
     marginTop: 25,
@@ -63,7 +63,7 @@ const styles2 = StyleSheet.create({
   },
   text2: {
     padding: 30,
-    fontFamily: 'roboto',
+    fontFamily: 'Roboto',
     fontSize: 16,
     color: 'black',
     letterSpacing: 0,
