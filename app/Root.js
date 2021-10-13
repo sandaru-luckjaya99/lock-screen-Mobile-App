@@ -42,12 +42,8 @@ export default class Lock_screen_passcode extends Component {
     // permenent password
     const pincode = [1, 2, 3, 4];
 
-
-
-   
-
     // check how many times enter wrong
-    if ((this.state.count === 3) ) {
+    if ((this.state.count === 4) ) {
       // Verify the pin code -->> false part
       if (JSON.stringify(tempCode) === JSON.stringify(pincode)) {
         this.setState({code_entrycount: this.state.code_entrycount + 1});
